@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>signuppage</servlet-name>
+    <jsp-file>signUp.jsp</jsp-file>
+  </servlet>
+  <servlet>
+    <servlet-name>loginpage</servlet-name>
+    <jsp-file>login.jsp</jsp-file>
+  </servlet>
+  <servlet>
+    <servlet-name>requestlistpage</servlet-name>
+    <jsp-file>list.jsp</jsp-file>
+  </servlet>
+  <servlet>
+    <servlet-name>requestformpage</servlet-name>
+    <jsp-file>form.jsp</jsp-file>
+  </servlet>
+</web-app>
