@@ -21,12 +21,3 @@ create table if not exists p1.request (
   status text
 );
 
-
-
-
-
-
-
-
-
-
