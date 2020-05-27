@@ -7,7 +7,8 @@ create table if not exists p1.employee (
   email varchar(20) unique not null,
   emp_username text,
   emp_password text,
-  emp_type text not null
+  emp_type text not null,
+  unique not null (emp_username, emp_password)
 );
 
 create table if not exists p1.request (
@@ -21,3 +22,6 @@ create table if not exists p1.request (
   status text
 );
 
+drop table p1.employee;
+drop table p1.request;
+drop schema p1;
