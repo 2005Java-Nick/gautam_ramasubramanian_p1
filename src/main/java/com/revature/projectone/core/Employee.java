@@ -22,8 +22,8 @@ public class Employee {
      
   }
 
-  public void pushToDatabase() {
-
+  public String pushToDatabase() {
+    return "";
   }
 
   public int getId() {
