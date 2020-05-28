@@ -1,4 +1,4 @@
-package com.revature.projectone.core;
+package com.revature.projectone.dto;
 
 public class Employee {
  
