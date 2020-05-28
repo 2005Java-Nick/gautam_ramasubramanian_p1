@@ -18,12 +18,7 @@ public class RegisterUserServlet extends HttpServlet {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
     String type = req.getParameter("type");
-    Employee employee = new Employee();
-    employee.setFirstName(firstName);
-    employee.setLastName(lastName);
-    employee.setUsername(username);
-    employee.setPassword(password);
-    employee.setType(type);
+    Employee employee = new Employee(firstName, lastName, username, password, type);
     RegisterUserDTO dto = new RegisterUserDTO(employee.pushToDatabase());
     String jsonReturn = (new ObjectMapper()).writeValueAsString(dto);
     resp.getWriter().write(jsonReturn);

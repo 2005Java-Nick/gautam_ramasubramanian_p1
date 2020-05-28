@@ -15,15 +15,16 @@ public class Employee {
   }
 
   public Employee() {
-    this.id = getNewId(); 
+    this.setId(getNewId()); 
   }
 
-  public void pullFromDatabase(String username, String password) {
-     
-  }
-
-  public String pushToDatabase() {
-    return "";
+  public Employee(String firstName, String lastName, String username, String password, String type) {
+    this();
+    this.setFirstName(firstName);
+    this.setLastName(lastName);
+    this.setUsername(username);
+    this.setPassword(password);
+    this.setType(type);
   }
 
   public int getId() {
