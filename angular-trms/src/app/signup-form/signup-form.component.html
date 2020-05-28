@@ -1,18 +1,35 @@
-<div>
-  <h2>{{ header | uppercase }}</h2>
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="firstName"  placeholder="First Name" required /><br>
-    <input type="text" formControlName="lastName" placeholder="Last Name" required /><br>
-    <input type="email" formControlName="email" placeholder="Email" required /><br>
-    <input type="text" formControlName="username" placeholder="Username" required /><br>
-    <input type="password" formControlName="password" placeholder="Password" required /><br>
-    <select formControlName="empType">
-        <option [ngValue]="null" disabled>Employee Type</option>
-        <option *ngFor="let opt of employeeOptions" [ngValue]="opt.name">
-          {{ opt.label }}
-        </option>
-    </select>
-    <br>
-    <button type="submit" [disabled]="!signupForm.valid">Register</button>
-  </form>
+<div id="signup-container">
+  <div id="signup">
+    <div id="link-buttons">
+      <a routerLink="/login" id="login-link">Login</a>
+      <a routerLink="/signup" id="signup-link">Signup</a>
+    </div>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <h2>{{ header | uppercase }}</h2>
+      <div>
+        <input type="text" class="name-input" formControlName="firstName"  placeholder="First Name" required />
+        <input type="text" class="name-input" formControlName="lastName" placeholder="Last Name" required />
+      </div>
+      <div>
+        <input type="email" formControlName="email" placeholder="Email" required />
+      </div>
+      <div>
+        <input type="text" formControlName="username" placeholder="Username" required />
+      </div>
+      <div>
+        <input type="password" formControlName="password" placeholder="Password" required />
+      </div>
+      <div>
+        <select formControlName="empType">
+          <option [ngValue]="null" disabled>Employee Type</option>
+          <option *ngFor="let opt of employeeOptions" [ngValue]="opt.name">
+            {{ opt.label }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <button type="submit" [disabled]="!signupForm.valid">Register</button>
+      </div>
+    </form>
+  </div>
 </div>

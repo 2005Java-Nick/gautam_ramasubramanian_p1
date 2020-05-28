@@ -1,0 +1,75 @@
+#signup-container {
+  display: flex;
+  justify-content: center;
+}
+
+#signup > #link-buttons {
+  display: flex;
+  justify-content: center; 
+}
+
+#link-buttons > a {
+  flex: 1 1 0%;
+  padding-right: 3rem;
+  padding-left: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: center;
+}
+
+#login-link {
+  background-color: #0f4c75;
+}
+
+#signup-link {
+  background-color: #3282b8;
+}
+
+#signup {
+  width: 40%;
+}
+
+#signup > form {
+  width: 100%;
+  background-color: #3282b8;
+}
+
+#signup h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+#signup div {
+  display: flex;
+  justify-content: center;
+}
+
+#signup input, #signup select {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-right: 7rem;
+  margin-left: 7rem;
+  flex: 1 1 0%;
+}
+
+#signup .name-input {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+#signup button {
+  margin: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #0f4c75;
+  color: #bbe1fa;
+  border: none;
+  font-weight: bold;
+}
