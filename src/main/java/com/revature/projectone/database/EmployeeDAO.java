@@ -11,8 +11,8 @@ import java.sql.ResultSet;
 public class EmployeeDAO {
 
   private Connection conn;
-  //private boolean wasSuccessful = false;
-  //private String queryMessage = "";
+  private boolean wasSuccessful = false;
+  private String queryMessage = "";
   
 
   public EmployeeDAO() {
@@ -42,5 +42,13 @@ public class EmployeeDAO {
   public Object[] retrieveEmployee() {
     return null; 
   }
-  
+
+  public boolean getWasSuccessful() {
+    return this.wasSuccessful;
+  }
+
+  public String getQueryMessage() {
+    return this.queryMessage;
+  }
+
 }

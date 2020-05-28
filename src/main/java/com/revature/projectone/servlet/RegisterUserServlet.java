@@ -5,8 +5,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.revature.projectone.dto.Employee;
+import com.revature.projectone.dto.StatusMessage;
 import com.revature.projectone.database.EmployeeDAO;
 
 public class RegisterUserServlet extends HttpServlet {
@@ -23,8 +25,9 @@ public class RegisterUserServlet extends HttpServlet {
     Employee employee = new Employee(firstName, lastName, username, password, type);
     EmployeeDAO employeeDao = new EmployeeDAO();
     employeeDao.insertEmployeeToDatabase(employee);
-    //RegisterUserDTO dto = new RegisterUserDTO(employee.pushToDatabase());
-    //String jsonReturn = (new ObjectMapper()).writeValueAsString(dto);
-    //resp.getWriter().write(jsonReturn);
+    StatusMessage statusMessage = 
+      new StatusMessage(employeeDao.getWasSuccessful(), employeeDao.getQueryMessage());
+    String jsonReturn = (new ObjectMapper()).writeValueAsString(statusMessage);
+    resp.getWriter().write(jsonReturn);
   }
 }
