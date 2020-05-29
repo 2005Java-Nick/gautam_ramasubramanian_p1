@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Option } from '../option-interface';
+import { Option } from '../../interface/option-interface';
 
 @Component({
   selector: 'app-signup-form',

@@ -28,7 +28,6 @@
 }
 
 #signup {
-  width: 40%;
 }
 
 #signup > form {
@@ -52,12 +51,12 @@
 #signup input, #signup select {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  margin-right: 7rem;
-  margin-left: 7rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
   flex: 1 1 0%;
 }
 
-#signup .name-input {
+#signup .flex-input {
   margin-right: 1rem;
   margin-left: 1rem;
 }
@@ -68,8 +67,8 @@
   padding-left: 1rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  background-color: #0f4c75;
   color: #bbe1fa;
   border: none;
   font-weight: bold;
+  background-color: #0f4c75;
 }

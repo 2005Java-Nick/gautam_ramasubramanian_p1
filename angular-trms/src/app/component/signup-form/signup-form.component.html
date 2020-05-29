@@ -7,11 +7,17 @@
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <h2>{{ header | uppercase }}</h2>
       <div>
-        <input type="text" class="name-input" formControlName="firstName"  placeholder="First Name" required />
-        <input type="text" class="name-input" formControlName="lastName" placeholder="Last Name" required />
+        <input type="text" class="flex-input" formControlName="firstName"  placeholder="First Name" required />
+        <input type="text" class="flex-input" formControlName="lastName" placeholder="Last Name" required />
       </div>
       <div>
-        <input type="email" formControlName="email" placeholder="Email" required />
+        <input type="email" class="flex-input" formControlName="email" placeholder="Email" required />
+        <select class="flex-input" formControlName="empType">
+          <option [ngValue]="null" disabled>Employee Type</option>
+          <option *ngFor="let opt of employeeOptions" [ngValue]="opt.name">
+            {{ opt.label }}
+          </option>
+        </select>
       </div>
       <div>
         <input type="text" formControlName="username" placeholder="Username" required />
@@ -20,12 +26,6 @@
         <input type="password" formControlName="password" placeholder="Password" required />
       </div>
       <div>
-        <select formControlName="empType">
-          <option [ngValue]="null" disabled>Employee Type</option>
-          <option *ngFor="let opt of employeeOptions" [ngValue]="opt.name">
-            {{ opt.label }}
-          </option>
-        </select>
       </div>
       <div>
         <button type="submit" [disabled]="!signupForm.valid">Register</button>

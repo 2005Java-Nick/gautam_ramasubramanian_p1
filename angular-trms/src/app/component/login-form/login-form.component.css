@@ -28,7 +28,6 @@
 }
 
 #login {
-  width: 40%;
 }
 
 #login > form {
@@ -52,8 +51,8 @@
 #login input {
   margin-top: 1rem;
   margin-bottom: 1rem;
-  margin-right: 7rem;
-  margin-left: 7rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
   flex: 1 1 0%;
 }
 
