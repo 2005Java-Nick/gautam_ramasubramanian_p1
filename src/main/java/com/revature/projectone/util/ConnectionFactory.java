@@ -39,7 +39,7 @@ public class ConnectionFactory {
     return conn;
   }
 
-  public static getConnection() {
+  public static Connection getConnection() {
     if (connectionFactory == null) {
       connectionFactory = new ConnectionFactory();
     }

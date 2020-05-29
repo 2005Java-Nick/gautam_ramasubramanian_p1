@@ -10,7 +10,7 @@ public class StatusMessage {
     this.message = "Message not set by servlet";
   }
 
-  public StatucMessage(boolean successStatus, String message) {
+  public StatusMessage(boolean successStatus, String message) {
     this.setSuccessStatus(successStatus);
     this.setMessage(message);
   }
