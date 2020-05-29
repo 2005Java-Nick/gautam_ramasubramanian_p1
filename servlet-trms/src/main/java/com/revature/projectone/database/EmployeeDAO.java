@@ -1,7 +1,9 @@
 package com.revature.projectone.database;
 
 import com.revature.projectone.dto.Employee;
+import com.revature.projectone.dto.StatusMessage;
 import com.revature.projectone.util.ConnectionFactory;
+import com.revature.projectone.database.DatabaseMessages;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,14 +15,14 @@ public class EmployeeDAO {
   private Connection conn;
   private boolean wasSuccessful = false;
   private String queryMessage = "";
-  
 
   public EmployeeDAO(Connection conn) {
     this.conn = conn;
   }
 
   // Put parameters here later
-  public void insertEmployeeToDatabase(Employee employee) {
+  public StatusMessage insertEmployeeToDatabase(Employee employee) {
+    StatusMessage msg = new StatusMessage();
     try {
       PreparedStatement ps = this.conn.prepareStatement("insert into p1.employee values (?,?,?,?,?,?,?);");
       ps.setInt(1, employee.getId());
@@ -32,24 +34,19 @@ public class EmployeeDAO {
       ps.setString(7, employee.getType());
       ps.executeUpdate();
     } catch (SQLException e) {
-      this.wasSuccessful = false;
-      this.queryMessage = e.getMessage();
-      return;
+      msg.setSuccessStatus(false);
+      String app_message = DatabaseMessages.getReadableFailMessage(e.getMessage());
+      msg.setMessage(app_message);
+      return msg;
     } 
-    this.wasSuccessful = true;
-    this.queryMessage = "New user entered into database";
+    msg.setSuccessStatus(true);
+    String app_message = DatabaseMessages.getSuccessMessage();
+    msg.setMessage(app_message);
+    return msg;
   } 
 
   public Object[] retrieveEmployee() {
     return null; 
-  }
-
-  public boolean getWasSuccessful() {
-    return this.wasSuccessful;
-  }
-
-  public String getQueryMessage() {
-    return this.queryMessage;
   }
 
 }

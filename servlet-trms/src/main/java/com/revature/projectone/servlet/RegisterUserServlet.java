@@ -29,19 +29,11 @@ public class RegisterUserServlet extends HttpServlet {
     
     Connection conn = ConnectionFactory.getConnection();
     EmployeeDAO employeeDao = new EmployeeDAO(conn);
-    employeeDao.insertEmployeeToDatabase(employee);
-    StatusMessage statusMessage = 
-      new StatusMessage(employeeDao.getWasSuccessful(), employeeDao.getQueryMessage());
+    StatusMessage statusMessage = employeeDao.insertEmployeeToDatabase(employee);
     String jsonReturn = (new ObjectMapper()).writeValueAsString(statusMessage);
     resp.getWriter().write(jsonReturn);
 
     ConnectionFactory.closeConnection(conn);
   }
 
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
-    throws IOException, ServletException
-  {
-    resp.getWriter().write("Hello register-user servlet");
-  }
 }
