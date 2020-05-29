@@ -15,14 +15,14 @@ public class EmployeeDAO {
   private String queryMessage = "";
   
 
-  public EmployeeDAO() {
-    conn = ConnectionFactory.getConnection();
+  public EmployeeDAO(Connection conn) {
+    this.conn = conn;
   }
 
   // Put parameters here later
   public void insertEmployeeToDatabase(Employee employee) {
     try {
-      PreparedStatement ps = conn.prepareStatement("insert into p1.employee values (?,?,?,?,?,?,?)");
+      PreparedStatement ps = this.conn.prepareStatement("insert into p1.employee values (?,?,?,?,?,?,?);");
       ps.setInt(1, employee.getId());
       ps.setString(2, employee.getFirstName());
       ps.setString(3, employee.getLastName());
@@ -34,6 +34,7 @@ public class EmployeeDAO {
     } catch (SQLException e) {
       this.wasSuccessful = false;
       this.queryMessage = e.getMessage();
+      return;
     } 
     this.wasSuccessful = true;
     this.queryMessage = "New user entered into database";

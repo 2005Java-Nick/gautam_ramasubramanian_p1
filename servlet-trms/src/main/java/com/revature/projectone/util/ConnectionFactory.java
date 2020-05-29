@@ -31,7 +31,7 @@ public class ConnectionFactory {
       System.exit(1);
     }
     try {
-      conn = DriverManager.getConnection(url, username, password); 
+      conn = DriverManager.getConnection(completeUrl, username, password); 
     } catch (SQLException e) {
       System.out.println("Error: unable to make connection with " + completeUrl);
       System.exit(1);
@@ -44,5 +44,15 @@ public class ConnectionFactory {
       connectionFactory = new ConnectionFactory();
     }
     return connectionFactory.createConnection();
+  }
+
+  public static void closeConnection(Connection conn) {
+    try {
+      conn.close();
+      connectionFactory = null;
+    } catch (SQLException e) {
+      System.out.println("Error: Connection cannot close for some reason.");
+      System.exit(1);
+    }
   }
 }

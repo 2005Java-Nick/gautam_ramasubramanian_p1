@@ -1,5 +1,7 @@
 package com.revature.projectone.dto;
 
+import java.util.Random;
+
 public class Employee {
  
   int id;
@@ -11,17 +13,18 @@ public class Employee {
   String type; 
 
   public static int getNewId() {
-    return 0;
+    return (new Random()).nextInt();
   }
 
   public Employee() {
     this.setId(getNewId()); 
   }
 
-  public Employee(String firstName, String lastName, String username, String password, String type) {
+  public Employee(String firstName, String lastName, String email, String username, String password, String type) {
     this();
     this.setFirstName(firstName);
     this.setLastName(lastName);
+    this.setEmail(email);
     this.setUsername(username);
     this.setPassword(password);
     this.setType(type);
