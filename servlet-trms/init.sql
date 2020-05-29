@@ -17,3 +17,5 @@ dsid int references p1.employee(id),
 dhid int references p1.employee(id),
 bcid int references p1.employee(id),
 status text );
+
+insert into employee values (1, 'g', 'g', 'g', 'g', 'g', 'employee');
