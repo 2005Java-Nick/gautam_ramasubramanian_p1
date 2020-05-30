@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Option } from '../../interface/option.interface';
+import { Employee } from '../../interface/employee.interface';
+import { SignupService } from '../../service/signup.service';
 
 @Component({
   selector: 'app-signup-form',
@@ -28,10 +30,11 @@ export class SignupFormComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log(this.signupForm.value);
+    let employee : Employee = this.signupForm.value;
+    this.signupService.registerUser(employee);
   }
 
-  constructor(private formBuilder : FormBuilder) { }
+  constructor(private formBuilder : FormBuilder, private signupService : SignupService) { }
 
   ngOnInit(): void {
   }

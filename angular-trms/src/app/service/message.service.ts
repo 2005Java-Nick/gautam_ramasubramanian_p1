@@ -11,10 +11,9 @@ export class MessageService {
   constructor() { }
 
   setMessage(message : Message) {
+    console.log("Message Set: " + message.info);
     this.message = message;
   }
-
-  
 
   getMessage(message : Message) {
     return this.message;

@@ -71,4 +71,9 @@
   border: none;
   font-weight: bold;
   background-color: #0f4c75;
+  cursor: pointer;
+}
+
+#signup button:disabled {
+  cursor: default;
 }

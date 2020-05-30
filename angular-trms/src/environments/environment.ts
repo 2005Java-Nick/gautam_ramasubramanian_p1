@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  trmsUrl: 'http://localhost:8080/trms',
+  registerUrl: '/api/register-user',
+  loginUrl: '/api/login-user'
 };
 
 /*
