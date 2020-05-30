@@ -25,6 +25,7 @@ public class RegisterUserServlet extends HttpServlet {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
     String type = req.getParameter("type");
+    System.out.println("---------------------------------------------");
     Employee employee = new Employee(firstName, lastName, email, username, password, type);
     
     Connection conn = ConnectionFactory.getConnection();
@@ -32,7 +33,7 @@ public class RegisterUserServlet extends HttpServlet {
     StatusMessage statusMessage = employeeDao.insertEmployeeToDatabase(employee);
     String jsonReturn = (new ObjectMapper()).writeValueAsString(statusMessage);
     resp.getWriter().write(jsonReturn);
-
+    
     ConnectionFactory.closeConnection(conn);
   }
 
