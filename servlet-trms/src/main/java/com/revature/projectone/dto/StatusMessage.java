@@ -3,16 +3,16 @@ package com.revature.projectone.dto;
 public class StatusMessage {
   
   private boolean successStatus;
-  private String message;
+  private String info;
 
   public StatusMessage() {
     this.successStatus = false;
-    this.message = "Message not set by servlet";
+    this.info = "Message not set by servlet";
   }
 
-  public StatusMessage(boolean successStatus, String message) {
+  public StatusMessage(boolean successStatus, String info) {
     this.setSuccessStatus(successStatus);
-    this.setMessage(message);
+    this.setInfo(info);
   }
 
   public boolean getSuccessStatus() {
@@ -23,12 +23,12 @@ public class StatusMessage {
     this.successStatus = successStatus;
   }
 
-  public String getMessage() {
-    return this.message;
+  public String getInfo() {
+    return this.info;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setInfo(String info) {
+    this.info = info;
   }
 
 }

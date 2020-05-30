@@ -13,8 +13,7 @@ import java.sql.ResultSet;
 public class EmployeeDAO {
 
   private Connection conn;
-  private boolean wasSuccessful = false;
-  private String queryMessage = "";
+  private static final String SUCCESS_INFO = "New user entered into database";
 
   public EmployeeDAO(Connection conn) {
     this.conn = conn;
@@ -35,13 +34,11 @@ public class EmployeeDAO {
       ps.executeUpdate();
     } catch (SQLException e) {
       msg.setSuccessStatus(false);
-      String app_message = DatabaseMessages.getReadableFailMessage(e.getMessage());
-      msg.setMessage(app_message);
+      msg.setInfo(e.getMessage());
       return msg;
     } 
     msg.setSuccessStatus(true);
-    String app_message = DatabaseMessages.getSuccessMessage();
-    msg.setMessage(app_message);
+    msg.setInfo(SUCCESS_INFO);
     return msg;
   } 
 
