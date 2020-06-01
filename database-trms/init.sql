@@ -75,10 +75,10 @@ create table if not exists p1.reimbursedEvent (
 /********************************************************************
  * Create a Reimbursement Request Table in Project 1 Schema
  ********************************************************************/
-create table if not exists p1.reimbursementRequest ( 
+create table if not exists p1.reimbursementForm ( 
   rrId bigserial primary key,
   rrRequester int,
-  rrDateTimeOfRequest timestamp,
+  rrDateTimeOfRequest timestamp with time zone,
   rrEvent int,
   rrReimbursementAmount money,
   rrUrgent boolean,
@@ -91,10 +91,10 @@ create table if not exists p1.reimbursementRequest (
 /********************************************************************
  * Every Reimbursement Request is tied to an employee and an event
  ********************************************************************/
-alter table p1.reimbursementRequest add constraint fk_rrRequester foreign key (rrRequester)
+alter table p1.reimbursementForm add constraint fk_rrRequester foreign key (rrRequester)
   references p1.employee(empId) on delete no action on update no action;
 
-alter table p1.reimbursementRequest add constraint fk_rrEvent foreign key (rrEvent)
+alter table p1.reimbursementForm add constraint fk_rrEvent foreign key (rrEvent)
   references p1.reimbursedEvent(eventId) on delete no action on update no action;
 
 /********************************************************************
@@ -105,6 +105,7 @@ create table if not exists p1.file (
   fileId bigserial primary key,
   fileName text,
   fileContent bytea,
+  fileUploadDateTime timestamp with time zone,
   fileRR int
 );
 
@@ -112,7 +113,7 @@ create table if not exists p1.file (
  * Make foreign key in File table to Reimbursement Request table
  ********************************************************************/
 alter table p1.file add constraint fk_fileRR foreign key (fileRR)
-  references p1.reimbursementRequest(rrId) on delete no action on update no action;
+  references p1.reimbursementForm(rrId) on delete no action on update no action;
 
 /********************************************************************
  * Create Table for Approval, Info and Change "Requests"
@@ -136,7 +137,9 @@ create table if not exists p1.approvalInfoChangeRequest (
   aicTo int,
   aicType varchar(30),
   aicStatus varchar(20),
-  aicMessage text
+  aicMessage text,
+  aicInitDateTime timestamp with time zone,
+  aicDoneDateTime timestamp with time zone
 );
 
 /********************************************************************
@@ -145,7 +148,7 @@ create table if not exists p1.approvalInfoChangeRequest (
  * It is initiated by an employee and is directed to another employee
  ********************************************************************/
 alter table p1.approvalInfoChangeRequest add constraint fk_aicRR foreign key (aicRR)
-  references p1.reimbursementRequest(rrId) on delete no action on update no action;
+  references p1.reimbursementForm(rrId) on delete no action on update no action;
 
 alter table p1.approvalInfoChangeRequest add constraint fk_aicFrom foreign key (aicFrom)
   references p1.employee(empId) on delete no action on update no action;
