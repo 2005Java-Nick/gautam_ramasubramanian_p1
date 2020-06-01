@@ -1,3 +1,10 @@
+/********************************************************************
+ * Project One Postgres Database Reset Script
+ * 
+ * Task - Drop all schemas, tables, functions and stored procedures
+ * 			needed for project one. Used for resetting the database
+ ********************************************************************/
+
 drop function if exists p1.getRequestHierarchy;
 drop function if exists p1.getRequestOrder;
 drop table if exists p1.approvalInfoChangeRequest;
