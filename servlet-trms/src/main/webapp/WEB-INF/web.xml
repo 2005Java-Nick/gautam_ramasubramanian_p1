@@ -5,16 +5,16 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
+
   <servlet>
-    <servlet-name>registerUser</servlet-name>
-    <servlet-class>com.revature.projectone.servlet.RegisterUserServlet</servlet-class>
+    <servlet-name>loginUser</servlet-name>
+    <servlet-class>com.revature.projectone.servlet.LoginUserServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>registerUser</servlet-name>
-    <url-pattern>/api/register-user</url-pattern>
+    <servlet-name>loginUser</servlet-name>
+    <url-pattern>/api/login</url-pattern>
   </servlet-mapping>
- 
+
   <filter>
     <filter-name>CorsFilter</filter-name>
     <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
