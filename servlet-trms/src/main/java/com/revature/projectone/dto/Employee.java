@@ -3,86 +3,342 @@ package com.revature.projectone.dto;
 import java.util.Random;
 
 public class Employee {
- 
-  int id;
-  String firstName;
-  String lastName;
-  String email;
-  String username;
-  String password;
-  String type; 
 
-  public static int getNewId() {
-    return (new Random()).nextInt();
+  private int empId;
+  private String empFirstName;
+  private String empLastName;
+  private String empUsername;
+  private String empPassword;
+  private String empHireDate;
+  private String empBirthDate;
+  private String empAddress;
+  private String empCity;
+  private String empState;
+  private String empCountry;
+  private String empPostalCode;
+  private String empPhone;
+  private int empDirectSup;
+  private int empDeptHead;
+  private int empBenCo;
+
+  /**
+   * Get empId.
+   *
+   * @return empId as int.
+   */
+  public int getEmpId()
+  {
+      return empId;
   }
-
-  public Employee() {
-    this.setId(getNewId()); 
+  
+  /**
+   * Set empId.
+   *
+   * @param empId the value to set.
+   */
+  public void setEmpId(int empId)
+  {
+      this.empId = empId;
   }
-
-  public Employee(String firstName, String lastName, String email, String username, String password, String type) {
-    this();
-    this.setFirstName(firstName);
-    this.setLastName(lastName);
-    this.setEmail(email);
-    this.setUsername(username);
-    this.setPassword(password);
-    this.setType(type);
+  
+  /**
+   * Get empFirstName.
+   *
+   * @return empFirstName as String.
+   */
+  public String getEmpFirstName()
+  {
+      return empFirstName;
   }
-
-  public int getId() {
-    return this.id;
+  
+  /**
+   * Set empFirstName.
+   *
+   * @param empFirstName the value to set.
+   */
+  public void setEmpFirstName(String empFirstName)
+  {
+      this.empFirstName = empFirstName;
   }
-
-  public void setId(int id) {
-    this.id = id;
+  
+  
+  /**
+   * Get empLastName.
+   *
+   * @return empLastName as String.
+   */
+  public String getEmpLastName()
+  {
+      return empLastName;
   }
-
-  public String getFirstName() {
-    return this.firstName;
+  
+  /**
+   * Set empLastName.
+   *
+   * @param empLastName the value to set.
+   */
+  public void setEmpLastName(String empLastName)
+  {
+      this.empLastName = empLastName;
   }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
+  
+  /**
+   * Get empUsername.
+   *
+   * @return empUsername as String.
+   */
+  public String getEmpUsername()
+  {
+      return empUsername;
   }
-
-  public String getLastName() {
-    return this.lastName;
+  
+  /**
+   * Set empUsername.
+   *
+   * @param empUsername the value to set.
+   */
+  public void setEmpUsername(String empUsername)
+  {
+      this.empUsername = empUsername;
   }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
+  
+  /**
+   * Get empPassword.
+   *
+   * @return empPassword as String.
+   */
+  public String getEmpPassword()
+  {
+      return empPassword;
   }
-
-  public String getEmail() {
-    return this.email;
+  
+  /**
+   * Set empPassword.
+   *
+   * @param empPassword the value to set.
+   */
+  public void setEmpPassword(String empPassword)
+  {
+      this.empPassword = empPassword;
   }
-
-  public void setEmail(String email) {
-    this.email = email;
+  
+  /**
+   * Get empHireDate.
+   *
+   * @return empHireDate as String.
+   */
+  public String getEmpHireDate()
+  {
+      return empHireDate;
   }
-
-  public String getUsername() {
-    return this.username;
+  
+  /**
+   * Set empHireDate.
+   *
+   * @param empHireDate the value to set.
+   */
+  public void setEmpHireDate(String empHireDate)
+  {
+      this.empHireDate = empHireDate;
   }
-
-  public void setUsername(String username) {
-    this.username = username;
+  
+  /**
+   * Get empBirthDate.
+   *
+   * @return empBirthDate as String.
+   */
+  public String getEmpBirthDate()
+  {
+      return empBirthDate;
   }
-
-  public String getPassword() {
-    return this.password;
+  
+  /**
+   * Set empBirthDate.
+   *
+   * @param empBirthDate the value to set.
+   */
+  public void setEmpBirthDate(String empBirthDate)
+  {
+      this.empBirthDate = empBirthDate;
   }
-
-  public void setPassword(String password) {
-    this.password = password;
+  
+  /**
+   * Get empAddress.
+   *
+   * @return empAddress as String.
+   */
+  public String getEmpAddress()
+  {
+      return empAddress;
   }
-
-  public String getType() {
-    return this.type;
+  
+  /**
+   * Set empAddress.
+   *
+   * @param empAddress the value to set.
+   */
+  public void setEmpAddress(String empAddress)
+  {
+      this.empAddress = empAddress;
   }
-
-  public void setType(String type) {
-    this.type = type;
+  
+  /**
+   * Get empCity.
+   *
+   * @return empCity as String.
+   */
+  public String getEmpCity()
+  {
+      return empCity;
+  }
+  
+  /**
+   * Set empCity.
+   *
+   * @param empCity the value to set.
+   */
+  public void setEmpCity(String empCity)
+  {
+      this.empCity = empCity;
+  }
+  
+  /**
+   * Get empState.
+   *
+   * @return empState as String.
+   */
+  public String getEmpState()
+  {
+      return empState;
+  }
+  
+  /**
+   * Set empState.
+   *
+   * @param empState the value to set.
+   */
+  public void setEmpState(String empState)
+  {
+      this.empState = empState;
+  }
+  
+  /**
+   * Get empCountry.
+   *
+   * @return empCountry as String.
+   */
+  public String getEmpCountry()
+  {
+      return empCountry;
+  }
+  
+  /**
+   * Set empCountry.
+   *
+   * @param empCountry the value to set.
+   */
+  public void setEmpCountry(String empCountry)
+  {
+      this.empCountry = empCountry;
+  }
+  
+  /**
+   * Get empPostalCode.
+   *
+   * @return empPostalCode as String.
+   */
+  public String getEmpPostalCode()
+  {
+      return empPostalCode;
+  }
+  
+  /**
+   * Set empPostalCode.
+   *
+   * @param empPostalCode the value to set.
+   */
+  public void setEmpPostalCode(String empPostalCode)
+  {
+      this.empPostalCode = empPostalCode;
+  }
+  
+  /**
+   * Get empPhone.
+   *
+   * @return empPhone as String.
+   */
+  public String getEmpPhone()
+  {
+      return empPhone;
+  }
+  
+  /**
+   * Set empPhone.
+   *
+   * @param empPhone the value to set.
+   */
+  public void setEmpPhone(String empPhone)
+  {
+      this.empPhone = empPhone;
+  }
+  
+  /**
+   * Get empDirectSup.
+   *
+   * @return empDirectSup as int.
+   */
+  public int getEmpDirectSup()
+  {
+      return empDirectSup;
+  }
+  
+  /**
+   * Set empDirectSup.
+   *
+   * @param empDirectSup the value to set.
+   */
+  public void setEmpDirectSup(int empDirectSup)
+  {
+      this.empDirectSup = empDirectSup;
+  }
+  
+  /**
+   * Get empDeptHead.
+   *
+   * @return empDeptHead as int.
+   */
+  public int getEmpDeptHead()
+  {
+      return empDeptHead;
+  }
+  
+  /**
+   * Set empDeptHead.
+   *
+   * @param empDeptHead the value to set.
+   */
+  public void setEmpDeptHead(int empDeptHead)
+  {
+      this.empDeptHead = empDeptHead;
+  }
+  
+  /**
+   * Get empBenCo.
+   *
+   * @return empBenCo as int.
+   */
+  public int getEmpBenCo()
+  {
+      return empBenCo;
+  }
+  
+  /**
+   * Set empBenCo.
+   *
+   * @param empBenCo the value to set.
+   */
+  public void setEmpBenCo(int empBenCo)
+  {
+      this.empBenCo = empBenCo;
   }
 }
