@@ -33,5 +33,7 @@ public class LoginUserServlet extends HttpServlet {
     
     String jsonReturn = (new ObjectMapper()).writeValueAsString(loginMessage);
     resp.getWriter().write(jsonReturn);  
+    
+    ConnectionFactory.closeConnection(conn);
   }
 }

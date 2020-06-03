@@ -13,6 +13,8 @@ import com.revature.projectone.dto.StatusMessage;
 import com.revature.projectone.database.EmployeeDAO;
 import com.revature.projectone.util.ConnectionFactory;
 
+/* --------------------------------- Deprecated --------------------------------- */ 
+/*
 public class RegisterUserServlet extends HttpServlet {
 
   @Override
@@ -25,7 +27,6 @@ public class RegisterUserServlet extends HttpServlet {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
     String type = req.getParameter("type");
-    System.out.println("---------------------------------------------");
     Employee employee = new Employee(firstName, lastName, email, username, password, type);
     
     Connection conn = ConnectionFactory.getConnection();
@@ -37,4 +38,6 @@ public class RegisterUserServlet extends HttpServlet {
     ConnectionFactory.closeConnection(conn);
   }
 
-}
+}*/
+/* --------------------------------- Deprecated --------------------------------- */ 
+

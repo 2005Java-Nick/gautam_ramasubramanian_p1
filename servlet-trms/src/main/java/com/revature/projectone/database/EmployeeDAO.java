@@ -1,7 +1,7 @@
 package com.revature.projectone.database;
 
 import com.revature.projectone.dto.Employee;
-import com.revature.projectone.dto.Message;
+import com.revature.projectone.dto.LoginMessage;
 import com.revature.projectone.util.ConnectionFactory;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 public class EmployeeDAO {
 
   private Connection conn;
-  private static final String SUCCESS_INFO = "New user entered into database";
+  private static final String SUCCESS_INFO = "Employees successfully retrieved from database";
 
   public EmployeeDAO(Connection conn) {
     this.conn = conn;
