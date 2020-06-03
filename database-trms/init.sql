@@ -1,8 +1,8 @@
 /********************************************************************
  * Project One Postgres Database Initialization Script
  * 
- * Task - Set up all schemas, tables, functions and stored procedures
- * 			needed for project one
+ * Task - Set up all schemas, tables, and constraints 
+ *          needed for project one
  * 
  ********************************************************************/
 
@@ -60,12 +60,15 @@ alter table p1.employee add constraint fk_empBenCo foreign key (empBenCo)
 create table if not exists p1.reimbursedEvent (
   eventId bigserial primary key,
   eventType varchar(30) not null,
+  eventName text not null,
   eventDescription text,
   eventAddress varchar(50),
   eventCity varchar(20),
   eventState varchar(20),
   eventCountry varchar(20),
   eventPostalCode varchar(10),
+  eventStart date,
+  eventEnd date,
   eventWorkDaysMissedStart date,
   eventWorkDaysMissedEnd date,
   eventCost money,
@@ -76,25 +79,25 @@ create table if not exists p1.reimbursedEvent (
  * Create a Reimbursement Request Table in Project 1 Schema
  ********************************************************************/
 create table if not exists p1.reimbursementForm ( 
-  rrId bigserial primary key,
-  rrRequester int,
-  rrDateTimeOfRequest timestamp with time zone,
-  rrEvent int,
-  rrReimbursementAmount money,
-  rrUrgent boolean,
-  rrStatus varchar(20),
-  rrStatusMessage text,
-  rrGradingFormat varchar(20),
-  rrGrade text
+  rfId bigserial primary key,
+  rfRequester int,
+  rfDateTimeOfRequest timestamp with time zone,
+  rfEvent int,
+  rfReimbursementAmount money,
+  rfUrgent boolean,
+  rfStatus varchar(20),
+  rfStatusMessage text,
+  rfGradingFormat varchar(20),
+  rfGrade text
 );
 
 /********************************************************************
  * Every Reimbursement Request is tied to an employee and an event
  ********************************************************************/
-alter table p1.reimbursementForm add constraint fk_rrRequester foreign key (rrRequester)
+alter table p1.reimbursementForm add constraint fk_rfRequester foreign key (rfRequester)
   references p1.employee(empId) on delete no action on update no action;
 
-alter table p1.reimbursementForm add constraint fk_rrEvent foreign key (rrEvent)
+alter table p1.reimbursementForm add constraint fk_rfEvent foreign key (rfEvent)
   references p1.reimbursedEvent(eventId) on delete no action on update no action;
 
 /********************************************************************
@@ -106,14 +109,14 @@ create table if not exists p1.file (
   fileName text,
   fileContent bytea,
   fileUploadDateTime timestamp with time zone,
-  fileRR int
+  fileRF int
 );
 
 /********************************************************************
  * Make foreign key in File table to Reimbursement Request table
  ********************************************************************/
-alter table p1.file add constraint fk_fileRR foreign key (fileRR)
-  references p1.reimbursementForm(rrId) on delete no action on update no action;
+alter table p1.file add constraint fk_fileRF foreign key (fileRF)
+  references p1.reimbursementForm(rfId) on delete no action on update no action;
 
 /********************************************************************
  * Create Table for Approval, Info and Change "Requests"
@@ -131,7 +134,7 @@ alter table p1.file add constraint fk_fileRR foreign key (fileRR)
  ********************************************************************/
 create table if not exists p1.approvalInfoChangeRequest (
   aicId bigserial primary key,
-  aicRR int,
+  aicRF int,
   aicOrder int,
   aicFrom int,
   aicTo int,
@@ -147,59 +150,11 @@ create table if not exists p1.approvalInfoChangeRequest (
  * 	is attached to a Reimbursement Request.
  * It is initiated by an employee and is directed to another employee
  ********************************************************************/
-alter table p1.approvalInfoChangeRequest add constraint fk_aicRR foreign key (aicRR)
-  references p1.reimbursementForm(rrId) on delete no action on update no action;
+alter table p1.approvalInfoChangeRequest add constraint fk_aicRF foreign key (aicRF)
+  references p1.reimbursementForm(rfId) on delete no action on update no action;
 
 alter table p1.approvalInfoChangeRequest add constraint fk_aicFrom foreign key (aicFrom)
   references p1.employee(empId) on delete no action on update no action;
 
 alter table p1.approvalInfoChangeRequest add constraint fk_aicTo foreign key (aicTo)
   references p1.employee(empId) on delete no action on update no action;
- 
-
-/********************************************************************
- * Helper Function - Not to be called directly but used in another function.
- * This outputs an integer that marks whether the employee id (called id)
- * 	is that of a employee, a supervisor, a department head 
- * 	or a benefits coordinator.
- ********************************************************************/
-create or replace function p1.getRequestOrder(id bigint, eid int, sid int, hId int, bId int) 
-  returns int
-  as $$
-    begin
-      if id = eid then return 1;
-      elsif id = sid then return 2;
-      elsif id = hid then return 3;
-      elsif id = bid then return 4;
-      else return 0;
-      end if;
-    end;
-  $$ language plpgsql;
-
-/********************************************************************
- * Function getRequestHierarchy
- * 	Takes in as input the employee username and password
- * 	and outputs the details of the employee, his/her supervisor, 
- * 		the department head and the benefits coordinator
- * 		in that order (using the helper function above).
- ********************************************************************/
-create or replace function p1.getRequestHierarchy(argUsername text, argPassword text) 
-	returns table (empId bigint, empFirstName varchar(20), empLastName varchar(30), empEmail varchar(50),
-  empUsername text, empPassword text, empPosition varchar(50), empHireDate date, empBirthDate date,
-  empAddress varchar(50), empCity varchar(20), empState varchar(20), empCountry varchar(20), empPostalCode varchar(10),
-  empPhone varchar(20), empDirectSup int, empDeptHead int, empBenCo int)
-	as $$
-		declare
-			eId int;
-			sId int;
-			hId int;
-			bId int;
-		begin
-			select e.empId, e.empDirectSup, e.empDeptHead, e.empBenCo from p1.employee e 
-				into eId, sId, hId, bId  
-				where e.empUsername = argUsername and e.empPassword = argPassword;
-			return query select * from p1.employee e 
-				where e.empId = eId or e.empId = sId or e.empId = hId or e.empId = bId
-				order by p1.getRequestOrder(e.empId, eId, sId, hId, bId) asc;
-		end;
-	$$ language plpgsql;

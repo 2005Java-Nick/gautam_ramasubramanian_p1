@@ -4,7 +4,9 @@
  * Task - Drop all schemas, tables, functions and stored procedures
  * 			needed for project one. Used for resetting the database
  ********************************************************************/
-
+drop function if exists p1.getReimbursementForms;
+drop function if exists p1.getLastUpdateTimestamp;
+drop function if exists p1.getSupervisedEmployees;
 drop function if exists p1.getRequestHierarchy;
 drop function if exists p1.getRequestOrder;
 drop table if exists p1.approvalInfoChangeRequest;
