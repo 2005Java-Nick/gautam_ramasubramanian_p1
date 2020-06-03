@@ -1,7 +1,7 @@
 package com.revature.projectone.database;
 
 import com.revature.projectone.dto.Employee;
-import com.revature.projectone.dto.LoginMessage;
+import com.revature.projectone.dto.EmployeeMessage;
 import com.revature.projectone.util.ConnectionFactory;
 
 import java.util.ArrayList;
@@ -20,8 +20,8 @@ public class EmployeeDAO {
     this.conn = conn;
   }
 
-  public LoginMessage retrieveRequestHierarchy(String username, String password) {
-    LoginMessage lmsg = new LoginMessage();
+  public EmployeeMessage retrieveRequestHierarchy(String username, String password) {
+    EmployeeMessage lmsg = new EmployeeMessage();
     ArrayList<Employee> empList = new ArrayList<Employee>();
     try {
       PreparedStatement ps = this.conn.prepareStatement("select * from p1.getRequestHierarchy(?,?);");

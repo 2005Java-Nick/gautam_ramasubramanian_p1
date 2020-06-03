@@ -1,6 +1,6 @@
 package com.revature.projectone.dto;
 
-public class LoginMessage extends Message {
+public class EmployeeMessage extends Message {
 
   private Employee[] requestHierarchy = null;
 

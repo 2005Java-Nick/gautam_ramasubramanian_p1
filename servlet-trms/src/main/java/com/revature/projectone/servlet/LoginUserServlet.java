@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.revature.projectone.dto.Employee;
-import com.revature.projectone.dto.LoginMessage;
+import com.revature.projectone.dto.EmployeeMessage;
 import com.revature.projectone.database.EmployeeDAO;
 import com.revature.projectone.util.ConnectionFactory;
 
@@ -25,7 +25,7 @@ public class LoginUserServlet extends HttpServlet {
     Connection conn = ConnectionFactory.getConnection();
 
     EmployeeDAO employeeDao = new EmployeeDAO(conn);
-    LoginMessage loginMessage = employeeDao.retrieveRequestHierarchy(username, password);
+    EmployeeMessage loginMessage = employeeDao.retrieveRequestHierarchy(username, password);
     
     session.setAttribute("username", loginMessage.getRequestHierarchy(0).getEmpUsername());
     session.setAttribute("password", loginMessage.getRequestHierarchy(0).getEmpPassword());
