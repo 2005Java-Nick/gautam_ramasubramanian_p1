@@ -48,7 +48,8 @@ public class EmployeeDAO {
         emp.setEmpBenCo(res.getInt("empBenCo"));
         empList.add(emp);
       }
-      lmsg.setRequestHierarchy(empList.toArray());
+      Employee[] empArray = new Employee[empList.size()];
+      lmsg.setRequestHierarchy(empList.toArray(empArray));
       lmsg.setSuccessStatus(true);
       lmsg.setInfo(SUCCESS_INFO);
     } catch (SQLException e) {

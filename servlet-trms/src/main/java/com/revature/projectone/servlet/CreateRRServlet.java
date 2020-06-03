@@ -1,4 +1,4 @@
-/* Deprecated Class */
+/* --------------------------------- Deprecated ---------------------------------
 
 package com.revature.projectone.servlet;
 
@@ -37,3 +37,4 @@ public class CreateRRServlet extends HttpServlet {
     resp.getWriter().write(jsonReturn);
   } 
 }
+--------------------------------- Deprecated --------------------------------- */ 

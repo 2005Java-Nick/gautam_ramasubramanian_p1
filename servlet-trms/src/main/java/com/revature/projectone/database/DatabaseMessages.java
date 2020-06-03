@@ -1,5 +1,4 @@
-/* Deprecated Class */
-
+/* --------------------------------- Deprecated ---------------------------------
 package com.revature.projectone.database;
 
 public class DatabaseMessages {
@@ -26,7 +25,7 @@ public class DatabaseMessages {
 
 }
 
-/*
+
   public StatusMessage insertEmployeeToDatabase(Employee employee) {
     StatusMessage msg = new StatusMessage();
     try {
@@ -48,4 +47,5 @@ public class DatabaseMessages {
     msg.setInfo(SUCCESS_INFO);
     return msg;
   } 
-  */
+
+--------------------------------- Deprecated --------------------------------- */

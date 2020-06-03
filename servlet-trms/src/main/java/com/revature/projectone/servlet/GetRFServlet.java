@@ -2,6 +2,7 @@ package com.revature.projectone.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,13 +26,13 @@ public class GetRFServlet extends HttpServlet {
       if (session == null) {
         RFMessage rfmsg = new RFMessage();
         rfmsg.setSuccessStatus(false);
-        rfmsg.setInfo(NOTLOGGED_IN);
+        rfmsg.setInfo(NOT_LOGGED_IN);
         return;
       }
 
       Connection conn = ConnectionFactory.getConnection();
       ReimbursementFormDAO rfdao = new ReimbursementFormDAO(conn);
-      RFMessage rfmsg = rfdao.retrieveReimbursementForms(session.getAttribute("id"));
+      RFMessage rfmsg = rfdao.retrieveReimbursementForms((Integer) session.getAttribute("id"));
       String jsonReturn = (new ObjectMapper()).writeValueAsString(rfmsg);
       resp.getWriter().write(jsonReturn);
 

@@ -21,7 +21,7 @@ public class ReimbursementFormDAO {
 
   public RFMessage retrieveReimbursementForms(int empId) {
     RFMessage rfmsg = new RFMessage();
-    ArrayList<ReimbursementForm> rfList = new Array<ReimbursementForm>();
+    ArrayList<ReimbursementForm> rfList = new ArrayList<ReimbursementForm>();
     try {
       PreparedStatement ps = this.conn.prepareStatement("select * from p1.getReimbursementForms(?);");
       ps.setInt(1, empId);
@@ -32,14 +32,15 @@ public class ReimbursementFormDAO {
         form.setRfRequester(res.getInt("rfRequester"));
         form.setRfDateTimeOfRequest(res.getString("rfDateTimeOfRequest"));
         form.setRfEvent(res.getInt("rfEvent"));
-        form.setRfUrgent(res.getBoolean("rfUrgent");
+        form.setRfUrgent(res.getBoolean("rfUrgent"));
         form.setRfStatus(res.getString("rfStatus"));
         form.setRfStatusMessage(res.getString("rfStatusMessage"));
         form.setRfGradingFormat(res.getString("rfGradingFormat"));
         form.setRfGrade(res.getString("rfGrade"));
         rfList.add(form);
       }
-      rfmsg.setForms(rfList.toArray());
+      ReimbursementForm[] rfArray = new ReimbursementForm[rfList.size()];
+      rfmsg.setForms(rfList.toArray(rfArray));
       rfmsg.setSuccessStatus(true);
       rfmsg.setInfo(SUCCESS_INFO);
     } catch (SQLException e) {
