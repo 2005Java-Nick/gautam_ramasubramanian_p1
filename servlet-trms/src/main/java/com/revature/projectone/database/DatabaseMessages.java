@@ -1,3 +1,5 @@
+/* Deprecated Class */
+
 package com.revature.projectone.database;
 
 public class DatabaseMessages {
@@ -23,3 +25,27 @@ public class DatabaseMessages {
   }
 
 }
+
+/*
+  public StatusMessage insertEmployeeToDatabase(Employee employee) {
+    StatusMessage msg = new StatusMessage();
+    try {
+      PreparedStatement ps = this.conn.prepareStatement("insert into p1.employee values (?,?,?,?,?,?,?);");
+      ps.setInt(1, employee.getId());
+      ps.setString(2, employee.getFirstName());
+      ps.setString(3, employee.getLastName());
+      ps.setString(4, employee.getEmail());
+      ps.setString(5, employee.getUsername());
+      ps.setString(6, employee.getPassword());
+      ps.setString(7, employee.getType());
+      ps.executeUpdate();
+    } catch (SQLException e) {
+      msg.setSuccessStatus(false);
+      msg.setInfo(e.getMessage());
+      return msg;
+    } 
+    msg.setSuccessStatus(true);
+    msg.setInfo(SUCCESS_INFO);
+    return msg;
+  } 
+  */
