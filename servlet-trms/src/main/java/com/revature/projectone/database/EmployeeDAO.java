@@ -1,9 +1,10 @@
 package com.revature.projectone.database;
 
 import com.revature.projectone.dto.Employee;
-import com.revature.projectone.dto.StatusMessage;
+import com.revature.projectone.dto.Message;
 import com.revature.projectone.util.ConnectionFactory;
-import com.revature.projectone.database.DatabaseMessages;
+
+import java.util.ArrayList;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,31 +20,43 @@ public class EmployeeDAO {
     this.conn = conn;
   }
 
-  // Put parameters here later
-  public StatusMessage insertEmployeeToDatabase(Employee employee) {
-    StatusMessage msg = new StatusMessage();
+  public LoginMessage retrieveRequestHierarchy(String username, String password) {
+    LoginMessage lmsg = new LoginMessage();
+    ArrayList<Employee> empList = new ArrayList<Employee>();
     try {
-      PreparedStatement ps = this.conn.prepareStatement("insert into p1.employee values (?,?,?,?,?,?,?);");
-      ps.setInt(1, employee.getId());
-      ps.setString(2, employee.getFirstName());
-      ps.setString(3, employee.getLastName());
-      ps.setString(4, employee.getEmail());
-      ps.setString(5, employee.getUsername());
-      ps.setString(6, employee.getPassword());
-      ps.setString(7, employee.getType());
-      ps.executeUpdate();
+      PreparedStatement ps = this.conn.prepareStatement("select * from p1.getRequestHierarchy(?,?);");
+      ps.setString(1, username);
+      ps.setString(2, password);
+      ResultSet res = ps.executeQuery();
+      while (res.next()) {
+        Employee emp = new Employee();
+        emp.setEmpId(res.getInt("empId"));
+        emp.setEmpFirstName(res.getString("empFirstName"));
+        emp.setEmpLastName(res.getString("empLastName"));
+        emp.setEmpUsername(res.getString("empUsername"));
+        emp.setEmpPassword(res.getString("empPassword"));
+        emp.setEmpHireDate(res.getString("empHireDate"));
+        emp.setEmpBirthDate(res.getString("empBirthDate"));
+        emp.setEmpAddress(res.getString("empAddress"));
+        emp.setEmpCity(res.getString("empCity"));
+        emp.setEmpState(res.getString("empState"));
+        emp.setEmpCountry(res.getString("empCountry"));
+        emp.setEmpPostalCode(res.getString("empPostalCode"));
+        emp.setEmpPhone(res.getString("empPhone"));
+        emp.setEmpDirectSup(res.getInt("empDirectSup"));
+        emp.setEmpDeptHead(res.getInt("empDeptHead"));
+        emp.setEmpBenCo(res.getInt("empBenCo"));
+        empList.add(emp);
+      }
+      lmsg.setRequestHierarchy(empList.toArray());
+      lmsg.setSuccessStatus(true);
+      lmsg.setInfo(SUCCESS_INFO);
     } catch (SQLException e) {
-      msg.setSuccessStatus(false);
-      msg.setInfo(e.getMessage());
-      return msg;
-    } 
-    msg.setSuccessStatus(true);
-    msg.setInfo(SUCCESS_INFO);
-    return msg;
-  } 
-
-  public Object[] retrieveEmployee() {
-    return null; 
+      lmsg.setSuccessStatus(false);
+      lmsg.setInfo(e.getMessage()); 
+    }
+    return lmsg; 
   }
 
 }
+  
