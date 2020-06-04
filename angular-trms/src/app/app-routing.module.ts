@@ -5,7 +5,6 @@ import { SignupFormComponent } from './component/signup-form/signup-form.compone
 
 
 const routes: Routes = [
-  { path: "signup", component: SignupFormComponent },
   { path: "login", component: LoginFormComponent },
   { path: "", redirectTo: "/login", pathMatch: "full" }
 ];

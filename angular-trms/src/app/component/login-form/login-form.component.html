@@ -1,11 +1,7 @@
 <div id="login-container">
   <div id="login">
-    <div id="link-buttons">
-      <a routerLink="/login" id="login-link">Login</a>
-      <a routerLink="/signup" id="signup-link">Signup</a>
-    </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h2>{{ header | uppercase }}</h2>
+      <h2>{{ header }}</h2>
       <div>
         <input type="text" formControlName="username" placeholder="Username" required />
       </div>
