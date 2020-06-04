@@ -32,7 +32,7 @@ public class EmployeeDAO {
       ResultSet res = ps.executeQuery();
       while (res.next()) {
         Integer eid = res.getInt("loginUser");
-        if (eid != null) {
+        if (!res.wasNull()) {
           lmsg.setSuccessStatus(true);
           lmsg.setInfo(LOGIN_SUCCESS_INFO);
           lmsg.setEmployeeId(eid);
