@@ -6,13 +6,33 @@
  ********************************************************************/
 
 /********************************************************************
+ * loginUser Function
+ * This takes in a username and password
+ * 		and outputs empId if employee with those details exist 
+ * 			in the table
+ * 		and -1 if employee with those details does not exist
+ * 			in the table
+ ********************************************************************/
+create or replace function p1.loginUser(username text, passwd text)
+	returns int
+	as $$
+		declare
+			res int;
+		begin
+			select e.empId from p1.employee e into res
+				where e.empUsername = username and e.empPassword = passwd;
+			return res;
+		end;
+	$$ language plpgsql;
+
+/********************************************************************
  * getRequestOrder Function
  * Helper Function - Not to be called directly but used in another function.
  * This outputs an integer that marks whether the employee id (called id)
  * 	is that of a employee, a supervisor, a department head 
  * 	or a benefits coordinator.
  ********************************************************************/
-create or replace function p1.getRequestOrder(id bigint, eid int, sid int, hId int, bId int) 
+create or replace function p1.getRequestOrder(id int, eid int, sid int, hId int, bId int) 
   returns int
   as $$
     begin
@@ -32,8 +52,8 @@ create or replace function p1.getRequestOrder(id bigint, eid int, sid int, hId i
  * 		the department head and the benefits coordinator
  * 		in that order (using the helper function above).
  ********************************************************************/
-create or replace function p1.getRequestHierarchy(argUsername text, argPassword text) 
-	returns table (empId bigint, empFirstName varchar(20), empLastName varchar(30), empEmail varchar(50),
+create or replace function p1.getRequestHierarchy(employeeId int) 
+	returns table (empId int, empFirstName varchar(20), empLastName varchar(30), empEmail varchar(50),
   empUsername text, empPassword text, empPosition varchar(50), empHireDate date, empBirthDate date,
   empAddress varchar(50), empCity varchar(20), empState varchar(20), empCountry varchar(20), empPostalCode varchar(10),
   empPhone varchar(20), empDirectSup int, empDeptHead int, empBenCo int)
@@ -46,7 +66,7 @@ create or replace function p1.getRequestHierarchy(argUsername text, argPassword 
 		begin
 			select e.empId, e.empDirectSup, e.empDeptHead, e.empBenCo from p1.employee e 
 				into eId, sId, hId, bId  
-				where e.empUsername = argUsername and e.empPassword = argPassword;
+				where e.empId = employeeId;
 			return query select * from p1.employee e 
 				where e.empId = eId or e.empId = sId or e.empId = hId or e.empId = bId
 				order by p1.getRequestOrder(e.empId, eId, sId, hId, bId) asc;
@@ -59,8 +79,8 @@ create or replace function p1.getRequestHierarchy(argUsername text, argPassword 
  *  of ids of employees that need his or her approval for reimbursement
  *  Also outputs his or her employee id in that list (i.e. the input)
  ********************************************************************/
-create or replace function p1.getSupervisedEmployees(eid bigint)
-  returns table (empId bigint)
+create or replace function p1.getSupervisedEmployees(eid int)
+  returns table (empId int)
   as $$
     begin
       return query select e.empId from p1.employee e
@@ -76,7 +96,7 @@ create or replace function p1.getSupervisedEmployees(eid bigint)
  *  of the last completed AIC request connected to that 
  *  reimbursement Form
  ********************************************************************/
-create or replace function p1.getLastUpdateTimestamp(rfid bigint)
+create or replace function p1.getLastUpdateTimestamp(rfid int)
   returns timestamp
   as $$
     declare
@@ -103,8 +123,8 @@ create or replace function p1.getLastUpdateTimestamp(rfid bigint)
  *  forms that you initiated as well as reimbursement forms that
  *  need your approval (initiated by subordinates)
  ********************************************************************/
-create or replace function p1.getReimbursementForms(eid bigint)
-  returns table(rfId bigint, rfRequester int, rfDateTimeOfRequest timestamp with time zone,
+create or replace function p1.getReimbursementForms(eid int)
+  returns table(rfId int, rfRequester int, rfDateTimeOfRequest timestamp with time zone,
   rfEvent int, rfReimbursementAmount money, rfUrgent boolean, rfStatus varchar(20),
   rfStatusMessage text, rfGradingFormat varchar(20), rfGrade text)
   as $$

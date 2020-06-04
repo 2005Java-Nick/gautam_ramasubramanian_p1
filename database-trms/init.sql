@@ -15,7 +15,7 @@ create schema if not exists p1;
  * Create an Employee Table inside Project 1 Schema
  ********************************************************************/
 create table if not exists p1.employee ( 
-  empId bigserial primary key,
+  empId serial primary key,
   empFirstName varchar(20) not null,
   empLastName varchar(30) not null,
   empEmail varchar(50) not null,
@@ -58,7 +58,7 @@ alter table p1.employee add constraint fk_empBenCo foreign key (empBenCo)
  * Create a Event Table in the Project 1 Schema
  ********************************************************************/
 create table if not exists p1.reimbursedEvent (
-  eventId bigserial primary key,
+  eventId serial primary key,
   eventType varchar(30) not null,
   eventName text not null,
   eventDescription text,
@@ -79,7 +79,7 @@ create table if not exists p1.reimbursedEvent (
  * Create a Reimbursement Request Table in Project 1 Schema
  ********************************************************************/
 create table if not exists p1.reimbursementForm ( 
-  rfId bigserial primary key,
+  rfId serial primary key,
   rfRequester int,
   rfDateTimeOfRequest timestamp with time zone,
   rfEvent int,
@@ -105,7 +105,7 @@ alter table p1.reimbursementForm add constraint fk_rfEvent foreign key (rfEvent)
  * 	They will be stored as hexadecimal strings
  ********************************************************************/
 create table if not exists p1.file (
-  fileId bigserial primary key,
+  fileId serial primary key,
   fileName text,
   fileContent bytea,
   fileUploadDateTime timestamp with time zone,
@@ -133,7 +133,7 @@ alter table p1.file add constraint fk_fileRF foreign key (fileRF)
  * 	to change something in his/her reimbursement request before approval
  ********************************************************************/
 create table if not exists p1.approvalInfoChangeRequest (
-  aicId bigserial primary key,
+  aicId serial primary key,
   aicRF int,
   aicOrder int,
   aicFrom int,

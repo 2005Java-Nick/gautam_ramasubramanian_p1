@@ -65,5 +65,6 @@ update p1.employee set empBenCo = 3 where empId = 4;
  * Test function - Should get back full info about
  * 	Samirah, Magnus, Annabeth and Percy in that order
  ********************************************************************/
-select * from p1.getRequestHierarchy('samirah', 'valkerie');
+select p1.loginUser('samirah', 'valkere');
+select * from p1.getRequestHierarchy(p1.loginUser('samirah', 'valkerie'));
 
