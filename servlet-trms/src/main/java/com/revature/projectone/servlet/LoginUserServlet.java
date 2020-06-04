@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.revature.projectone.dto.Employee;
-import com.revature.projectone.dto.EmployeeMessage;
+import com.revature.projectone.dto.LoginMessage;
 import com.revature.projectone.database.EmployeeDAO;
 import com.revature.projectone.util.ConnectionFactory;
 
@@ -22,17 +21,19 @@ public class LoginUserServlet extends HttpServlet {
   {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
-    HttpSession session = req.getSession(true);
     Connection conn = ConnectionFactory.getConnection();
 
     EmployeeDAO employeeDao = new EmployeeDAO(conn);
-    EmployeeMessage loginMessage = employeeDao.retrieveRequestHierarchy(username, password);
+    LoginMessage lmsg = employeeDao.loginUser(username, password);
     
-    session.setAttribute("username", loginMessage.getRequestHierarchy(0).getEmpUsername());
-    session.setAttribute("password", loginMessage.getRequestHierarchy(0).getEmpPassword());
-    session.setAttribute("id", loginMessage.getRequestHierarchy(0).getEmpId());
-    
-    String jsonReturn = (new ObjectMapper()).writeValueAsString(loginMessage);
+    if (lmsg.getSuccessStatus()) {
+      HttpSession session = req.getSession(true);
+      session.setAttribute("username", username);
+      session.setAttribute("password", password);
+      session.setAttribute("id", lmsg.getEmployeeId());
+    }
+
+    String jsonReturn = (new ObjectMapper()).writeValueAsString(lmsg);
     resp.getWriter().write(jsonReturn);  
     
     ConnectionFactory.closeConnection(conn);

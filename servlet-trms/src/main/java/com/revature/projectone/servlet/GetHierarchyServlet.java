@@ -9,34 +9,35 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.revature.projectone.dto.RFMessage;
-import com.revature.projectone.dto.ReimbursementForm;
-import com.revature.projectone.database.ReimbursementFormDAO;
+import com.revature.projectone.dto.Employee;
+import com.revature.projectone.dto.EmployeeMessage;
+import com.revature.projectone.database.EmployeeDAO;
 import com.revature.projectone.util.ConnectionFactory;
 
-public class GetRFServlet extends HttpServlet {
+public class GetHierarchyServlet extends HttpServlet {
 
   public static final String NOT_LOGGED_IN = "Employee has not logged in to our system.";
-
+  
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-    throws IOException, ServletException
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+    throws IOException, ServletException 
   {
       HttpSession session = req.getSession(false);
       Connection conn = ConnectionFactory.getConnection();
-      RFMessage rfmsg;
+      EmployeeMessage emsg;
       if (session == null) {
-        rfmsg = new RFMessage();
-        rfmsg.setSuccessStatus(false);
-        rfmsg.setInfo(NOT_LOGGED_IN);
+        emsg = new EmployeeMessage();
+        emsg.setSuccessStatus(false);
+        emsg.setInfo(NOT_LOGGED_IN);
       } else {
-        ReimbursementFormDAO rfdao = new ReimbursementFormDAO(conn);
-        rfmsg = rfdao.retrieveReimbursementForms((Integer) session.getAttribute("id"));
+        EmployeeDAO employeeDao = new EmployeeDAO(conn);
+        emsg = employeeDao.retrieveRequestHierarchy((Integer) session.getAttribute("id"));
       }
       
-      String jsonReturn = (new ObjectMapper()).writeValueAsString(rfmsg);
+      String jsonReturn = (new ObjectMapper()).writeValueAsString(emsg);
       resp.getWriter().write(jsonReturn);
 
       ConnectionFactory.closeConnection(conn);
   }
+
 }
