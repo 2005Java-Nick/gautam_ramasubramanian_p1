@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  trmsUrl: 'http://localhost:8080/trms',
-  registerUrl: '/api/register-user',
-  loginUrl: '/api/login-user'
+  trmsUrl: 'http://192.168.1.31:8080/trms',
+  loginUrl: '/api/login'
 };
 
 /*
