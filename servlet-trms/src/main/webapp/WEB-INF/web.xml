@@ -15,6 +15,16 @@
     <url-pattern>/api/login</url-pattern>
   </servlet-mapping>
 
+
+  <servlet>
+    <servlet-name>getRF</servlet-name>
+    <servlet-class>com.revature.projectone.servlet.GetRFServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getRF</servlet-name>
+    <url-pattern>/api/getrf</url-pattern>
+  </servlet-mapping>
+
   <filter>
     <filter-name>CorsFilter</filter-name>
     <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>

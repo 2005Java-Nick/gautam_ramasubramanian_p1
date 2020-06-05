@@ -1,0 +1,43 @@
+#rflist-container {
+  display: flex;
+}
+
+#rflist-container > div {
+  flex: 0 1 auto;
+}
+
+#links {
+  margin-right: 2rem;
+  margin-left: 2rem;
+  border-style: solid;
+  border-color: #cbd5e0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 4px -1px rgba(0,0,0,0.1);
+}
+
+#links > div {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+#rflist-container a, 
+#rflist-container h1,
+#rflist-container h2
+{
+  font-family: cursive;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+#form {
+  border-style: solid;
+  border-color: #cbd5e0;
+  border-radius: 1rem;
+  box-shadow: 0 4px 4px -1px rgba(0,0,0,0.1);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}

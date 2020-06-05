@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '../../service/login.service';
 
 @Component({
@@ -9,20 +10,28 @@ import { LoginService } from '../../service/login.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  header = "Login";
+  header = "Sign In";
 
   loginForm = this.formBuilder.group({
     username: [null, Validators.required],
     password: [null, Validators.required]
   });
 
-  constructor(private formBuilder : FormBuilder, private loginService : LoginService) { }
+  constructor(private formBuilder : FormBuilder, private loginService : LoginService, private router : Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() : void {
-    this.loginService.loginUser(this.loginForm.value.username, this.loginForm.value.password);
+    let username : string = this.loginForm.value.username;
+    let password : string = this.loginForm.value.password;
+
+    this.loginService.loginUser(username, password).subscribe((message) => {
+      console.log(message);
+      if (message.successStatus) {
+         this.router.navigate(["/forms"]);
+      } 
+    });
   }
 
 }

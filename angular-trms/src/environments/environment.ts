@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   trmsUrl: 'http://192.168.1.31:8080/trms',
-  loginUrl: '/api/login'
+  loginUrl: '/api/login',
+  getrfUrl: '/api/getrf'
 };
 
 /*

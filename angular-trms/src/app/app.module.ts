@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './component/login-form/login-form.component';
 import { HeaderComponent } from './component/header/header.component';
+import { RflistComponent } from './component/rflist/rflist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    RflistComponent
   ],
   imports: [
     BrowserModule,
